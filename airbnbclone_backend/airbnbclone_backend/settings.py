@@ -34,7 +34,7 @@ SIMPLE_JWT = {
     'ALGORITHM': 'HS512',
 }
 
-ACCOUNT_USER_MODAL_USERNAME_FIELD = None
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
@@ -53,6 +53,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://127.0.0.1:3000',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 REST_AUTH= {
     'USE_JWT': True,
@@ -154,7 +156,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-mx'
 
 TIME_ZONE = 'UTC'
 

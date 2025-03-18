@@ -34,7 +34,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     name= models.CharField(max_length=255, blank=True, null=True)
     avatar= models.ImageField(upload_to='uploads/avatars')
         
-    is_activate = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
         
@@ -46,3 +46,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
     REQUIRED_FIELDS = ["name",]
+    
+    def avatar_url(self):
+        if self.avatar:
+            return f'{settings.WEBSITE_URL}{self.avatar.url}'
+        else: 
+            return ''
