@@ -31,10 +31,16 @@ def properties_list(request):
     #
     # Filter
     
+    is_favorites = request.GET.get('is_favorites', '')
     landlord_id = request.GET.get('landlord_id', '')
     
     if landlord_id:
         properties = properties.filter(landlord_id=landlord_id)
+        
+    if is_favorites:
+        if is_favorites and user:
+            properties = properties.filter(favorited=user)
+
         
     #
     #Favorites
@@ -43,6 +49,7 @@ def properties_list(request):
         for property in properties:
             if user in property.favorited.all():
                 favorites.append(property.id)
+
                 
     #
     #
@@ -124,12 +131,12 @@ def book_property(request, pk):
 @api_view(['POST'])
 def toggle_favorite(request, pk):
     property = Property.objects.get(pk=pk)
-    
+
     if request.user in property.favorited.all():
         property.favorited.remove(request.user)
-        
+
         return JsonResponse({'is_favorite': False})
     else:
         property.favorited.add(request.user)
-        
+
         return JsonResponse({'is_favorite': True})
