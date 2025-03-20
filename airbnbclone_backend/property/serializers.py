@@ -35,9 +35,8 @@ class PropertyDetailSerializer(serializers.ModelSerializer):
         
         
 class ReservationListSerializer(serializers.ModelSerializer):
+    property = PropertiesListSerializer(read_only=True, many=False)
+
     class Meta:
-        property = PropertiesListSerializer(read_only=True, many=False)
         model = Reservation
-        fields = (
-            'id',  'start_date',  'end_date', 'number_of_nights', 'total_price', 'property'
-        )
+        fields = ('id', 'start_date', 'end_date', 'number_of_nights', 'total_price', 'property')
