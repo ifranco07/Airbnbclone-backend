@@ -17,5 +17,5 @@ class ConversationMessage(models.Model):
     conversation = models.ForeignKey(Conversation, related_name='messages', on_delete=models.CASCADE)
     body = models.TextField()
     sent_to = models.ForeignKey(User, related_name='received_messages', on_delete=models.CASCADE)
-    create_by = models.ForeignKey(User, related_name='sent_messages', on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, related_name='sent_messages', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

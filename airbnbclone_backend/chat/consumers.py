@@ -4,6 +4,7 @@ from asgiref.sync import sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 
 from .models import ConversationMessage
+from useraccount.models import User
 
 
 class ChatConsumer(AsyncWebsocketConsumer):
@@ -61,5 +62,5 @@ class ChatConsumer(AsyncWebsocketConsumer):
     @sync_to_async
     def save_message(self,  conversation_id, body, sent_to_id,):
         user = self.scope['user']
-        
-        ConversationMessage.objects.create(conversation_id=conversation_id, body=body, sent_to_id=sent_to_id, create_by_id=user.id)
+        u = User.objects.get(pk='dee3052e-fb7c-4bb7-b3ce-01b7010f691f')
+        ConversationMessage.objects.create(conversation_id=conversation_id, body=body, sent_to_id=sent_to_id, created_by=u)
